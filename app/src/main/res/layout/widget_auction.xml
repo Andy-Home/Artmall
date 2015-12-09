@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <ImageView
+            android:id="@+id/widget_auction_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY" />
+
+        <cn.iwgang.countdownview.CountdownView
+            android:id="@+id/widget_auction_time"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_alignRight="@id/widget_auction_image"
+            android:layout_alignTop="@id/widget_auction_image"
+            android:background="#e01A1A1A"
+            app:isShowDay="true"
+            app:isShowHour="true"
+            app:isShowMillisecond="false"
+            app:isShowMinute="true"
+            app:isShowSecond="true"
+            app:isTimeTextBold="true"
+            app:suffix="剩："
+            app:suffixDay="天"
+            app:suffixGravity="bottom"
+            app:suffixHour="时"
+            app:suffixMinute="分"
+            app:suffixSecond="秒"
+            app:suffixTextColor="@color/white"
+            app:suffixTextSize="12sp"
+            app:timeTextColor="@color/white"
+            app:timeTextSize="12sp" />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/widget_auction_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="start"
+            android:paddingLeft="10dp"
+            android:text="example"
+            android:textColor="@color/black" />
+
+        <com.count.andy.widget.HammerWidget
+            android:id="@+id/widget_auction_hammer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right" />
+    </LinearLayout>
+
+</LinearLayout>

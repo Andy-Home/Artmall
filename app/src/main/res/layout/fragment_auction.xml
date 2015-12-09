@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#FFFFFF"
+    android:scrollbars="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.count.andy.widget.TextWithButton
+            android:id="@+id/auction1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/auction_divi2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/auction1"
+            android:src="@color/grep" />
+
+        <LinearLayout
+            android:id="@+id/auction2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/auction_divi2"
+            android:orientation="vertical"
+            android:paddingTop="5dp" />
+
+        <ListView
+            android:id="@+id/auction_listView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/auction2"
+            android:divider="@color/white"
+            android:dividerHeight="7dp" />
+
+        <ImageView
+            android:id="@+id/auction_divi"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_below="@id/auction_listView"
+            android:background="@color/grep" />
+
+        <TextView
+            android:id="@+id/auction3"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/auction_divi"
+            android:layout_weight="1"
+            android:gravity="center|left"
+            android:paddingLeft="10dp"
+            android:text="单品推荐"
+            android:textColor="@color/black"
+            android:textSize="17dp"
+            android:typeface="monospace" />
+
+        <ImageView
+            android:id="@+id/auction_divi1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/auction3"
+            android:src="@color/grep" />
+
+        <GridView
+            android:id="@+id/auction4"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_below="@id/auction_divi1"
+            android:horizontalSpacing="5dp"
+            android:numColumns="2"
+            android:paddingTop="5dp"
+            android:scrollbars="none" />
+    </RelativeLayout>
+</ScrollView>

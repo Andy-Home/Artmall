@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/widget_choiceness_image"
+        android:layout_width="match_parent"
+        android:layout_height="175dp"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/widget_choiceness_title"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:typeface="monospace" />
+
+    <TextView
+        android:id="@+id/widget_choiceness_price"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:textColor="@color/silver"
+        android:typeface="sans" />
+</LinearLayout>

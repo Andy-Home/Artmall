@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?><!--将Tab放置屏幕下方遇到的问题：
+如何设置layout_height的值才能使content在tab上方，
+且tab不会覆盖content内容-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/center_tabcontent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#FFFFFF" />
+
+    <android.support.v4.app.FragmentTabHost
+        android:id="@+id/center_tabhost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF">
+
+        <TabWidget
+            android:id="@+id/center_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" />
+    </android.support.v4.app.FragmentTabHost>
+
+</LinearLayout>

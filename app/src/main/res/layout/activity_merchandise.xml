@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.daimajia.slider.library.SliderLayout
+            android:id="@+id/activity_merchandise_slider"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:background="@color/white" />
+
+        <LinearLayout
+            android:id="@+id/activity_merchandise_layout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activity_merchandise_slider"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/activity_merchandise_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="example"
+                    android:textColor="@color/black"
+                    android:textSize="17dp"
+                    android:typeface="monospace" />
+
+                <TextView
+                    android:id="@+id/activity_merchandise_current_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="example"
+                    android:textColor="@color/black"
+                    android:textSize="20dp"
+                    android:typeface="monospace" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:paddingRight="30dp"
+                    android:scaleType="fitEnd"
+                    android:src="@drawable/icon_warn_end" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="结束前提醒"
+                    android:textColor="@color/black"
+                    android:typeface="monospace" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/activity_merchandise_endtime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activity_merchandise_layout1"
+            android:text="距 结 束:"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+        <LinearLayout
+            android:id="@+id/activity_merchandise_layout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activity_merchandise_endtime"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/activity_merchandise_start_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/silver"
+                    android:typeface="monospace" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="竞拍额度: ￥0.00"
+                    android:textColor="@color/silver"
+                    android:typeface="monospace" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/activity_merchandise_increase"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/silver"
+                    android:typeface="monospace" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="加价延时： 5分钟/次"
+                    android:textColor="@color/silver"
+                    android:typeface="monospace" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/activity_merchandise_layout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activity_merchandise_layout2"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="7dp"
+                android:background="@color/silver" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="出价记录"
+                android:textColor="@color/black"
+                android:typeface="monospace" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="7dp"
+                android:background="@color/silver" />
+
+        </LinearLayout>
+
+        <WebView
+            android:id="@+id/activity_merchandise_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activity_merchandise_layout3"/>
+
+    </RelativeLayout>
+</ScrollView>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:paddingTop="10dp"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/widget_art_stage_date"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:background="@drawable/time_mouth"
+        android:gravity="center"
+        android:text="example"
+        android:translationX="10dp"
+        android:typeface="monospace" />
+
+    <TextView
+        android:id="@+id/widget_art_stage_title"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:translationX="10dp"
+        android:layout_toRightOf="@id/widget_art_stage_date"
+        android:gravity="center|left"
+        android:paddingLeft="10dp"
+        android:text="example"
+        android:typeface="monospace" />
+
+    <ImageView
+        android:id="@+id/widget_art_stage_image"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@id/widget_art_stage_title"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/widget_art_stage_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/widget_art_stage_date"
+        android:paddingLeft="5dp"
+        android:paddingTop="8dp"
+        android:textColor="#FFFFFF"
+        android:typeface="monospace" />
+
+    <TextView
+        android:id="@+id/widget_art_stage_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/widget_art_stage_name"
+        android:paddingLeft="5dp"
+        android:textColor="#FFFFFF"
+        android:typeface="monospace" />
+</RelativeLayout>

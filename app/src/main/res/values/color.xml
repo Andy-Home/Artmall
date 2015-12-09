@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#030303</color>
+    <color name="silver">#D3D3D3</color>
+    <color name="grep">#C1CDC1</color>
+    <color name="white">#FFFFFF</color>
+    <color name="nocolor">#00000000</color>
+    <color name="money">#FF4500</color>
+</resources>

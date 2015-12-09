@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/auction_list_background"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/widget_person_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY" />
+
+    <TextView
+        android:id="@+id/widget_person_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="17dp"
+        android:typeface="monospace" />
+
+    <TextView
+        android:id="@+id/widget_person_auctiontime"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:gravity="center|left"
+        android:textColor="@color/silver"
+        android:typeface="monospace" />
+
+    <TextView
+        android:id="@+id/widget_person_current_price"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:gravity="center|left"
+        android:textColor="@color/silver"
+        android:typeface="monospace" />
+
+    <TextView
+        android:id="@+id/widget_person_time"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:gravity="center|left"
+        android:textColor="@color/silver"
+        android:typeface="monospace" />
+</LinearLayout>

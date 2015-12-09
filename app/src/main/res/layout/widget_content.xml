@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:translationY="30dp">
+
+        <TextView
+            android:id="@+id/content_name"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/white"
+            android:gravity="left|center"
+            android:paddingLeft="90dp"
+            android:textColor="@color/black"
+            android:textSize="17dp" />
+
+        <TextView
+            android:id="@+id/content_viewernum"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_alignLeft="@id/content_name"
+            android:layout_below="@id/content_name"
+            android:background="@color/white"
+            android:gravity="left|center"
+            android:paddingLeft="90dp"
+            android:textColor="@color/silver" />
+
+        <WebView
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/content_viewernum" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="30dp">
+
+        <com.count.andy.widget.CircleImageView
+            android:id="@+id/content_image"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/content_artname"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_below="@id/content_image"
+            android:background="@color/white"
+            android:gravity="left|center"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:textColor="@color/silver"
+            android:typeface="monospace" />
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/auction_list_background"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/widget_auctioning_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:scaleType="fitXY" />
+
+    <TextView
+        android:id="@+id/widget_auctioning_name"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@id/widget_auctioning_image"
+        android:gravity="center|left"
+        android:paddingLeft="10dp"
+        android:textColor="@color/black"
+        android:textSize="17dp" />
+
+    <TextView
+        android:id="@+id/widget_auctioning_introduce"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/widget_auctioning_name"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:paddingLeft="10dp"
+        android:singleLine="false"
+        android:textColor="@color/silver" />
+
+    <RelativeLayout
+        android:id="@+id/widget_auctioning_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/widget_auctioning_introduce"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/widget_auctioning_up"
+            android:layout_width="20dp"
+            android:layout_height="35dp"
+            android:focusable="false"
+            android:src="@drawable/arraw_up"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/widget_auctioning_down"
+            android:layout_width="20dp"
+            android:layout_height="35dp"
+            android:focusable="false"
+            android:src="@drawable/arrow_down" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/widget_auctioning_div"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_below="@id/widget_auctioning_layout"
+        android:src="@drawable/auction_list_div" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/widget_auctioning_div">
+
+        <ImageView
+            android:id="@+id/widget_auctioning_clock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/clock_icon" />
+
+        <TextView
+            android:id="@+id/widget_auctioning_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/widget_auctioning_clock"
+            android:paddingLeft="5dp" />
+    </RelativeLayout>
+</RelativeLayout>
