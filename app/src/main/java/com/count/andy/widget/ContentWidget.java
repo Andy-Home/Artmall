@@ -11,6 +11,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.count.andy.artmall.R;
+import com.count.andy.network.GetBitMap;
+
+import java.io.IOException;
 
 /**
  * Created by andy on 15-11-30.
@@ -19,12 +22,14 @@ public class ContentWidget extends RelativeLayout {
     private ImageView imageView;
     private TextView name, num, art;
     private WebView content;
+    private Context context;
     public ContentWidget(Context context) {
         this(context, null);
     }
 
     public ContentWidget(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context = context;
         View view = LayoutInflater.from(context).inflate(R.layout.widget_content, this, true);
         imageView = (ImageView) view.findViewById(R.id.content_image);
         name = (TextView) view.findViewById(R.id.content_name);
@@ -45,8 +50,8 @@ public class ContentWidget extends RelativeLayout {
         art.setText(string);
     }
 
-    public void setImageView(Bitmap bitmap) {
-        imageView.setImageBitmap(bitmap);
+    public void setImageView(String bitmap) throws IOException {
+        GetBitMap.getBitmap(bitmap, context, imageView);
     }
 
     public void setContent(String string) {

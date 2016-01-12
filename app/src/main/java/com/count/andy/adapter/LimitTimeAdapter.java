@@ -9,8 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.count.andy.artmall.R;
+import com.count.andy.network.GetBitMap;
 import com.count.andy.structure.LimitTime;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -54,7 +56,11 @@ public class LimitTimeAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) view.getTag();
         }
-        viewHolder.imageView.setImageBitmap(limitTimes.get(i).bitmap);
+        try {
+            GetBitMap.getBitmap(limitTimes.get(i).bitmap, context, viewHolder.imageView);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         viewHolder.title.setText(limitTimes.get(i).name);
         viewHolder.author.setText(limitTimes.get(i).author);
         viewHolder.price.setText("￥" + limitTimes.get(i).price);

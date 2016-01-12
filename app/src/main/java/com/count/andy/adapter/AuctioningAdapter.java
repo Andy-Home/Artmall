@@ -9,9 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.count.andy.artmall.R;
+import com.count.andy.network.GetBitMap;
 import com.count.andy.structure.Auctioning;
 import com.count.andy.structure.Person;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -57,7 +59,11 @@ public class AuctioningAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) view.getTag();
         }
-        viewHolder.imageView.setImageBitmap(auctionings.get(i).bitmap);
+        try {
+            GetBitMap.getBitmap(auctionings.get(i).bitmap, context, viewHolder.imageView);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         viewHolder.name.setText(auctionings.get(i).name);
         viewHolder.detail.setText(auctionings.get(i).detail);
         viewHolder.time.setText(auctionings.get(i).time);

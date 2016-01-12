@@ -11,9 +11,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.count.andy.artmall.R;
+import com.count.andy.network.GetBitMap;
 import com.count.andy.structure.Person;
 import com.count.andy.structure.Single;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -56,7 +58,11 @@ public class FairHeadAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) view.getTag();
         }
-        viewHolder.imageView.setImageBitmap(persons.get(i).bitmap);
+        try {
+            GetBitMap.getBitmap(persons.get(i).bitmap, context, viewHolder.imageView);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         viewHolder.name.setText(persons.get(i).name);
         viewHolder.price.setText("￥" + persons.get(i).price);
         return view;

@@ -199,13 +199,8 @@ public class FairFragment extends Fragment implements View.OnClickListener {
                 String author = jsonObj.getString("author");
                 String id = jsonObj.getString("id");
                 String pictureUrl = jsonObj.getString("pictureUrl");
-                GetBitMap getpic = new GetBitMap();
-                getpic.getBitmap(pictureUrl, getActivity());
-                Bitmap bitmap = null;
-                while (bitmap == null) {
-                    bitmap = getpic.getpicture();
-                }
-                LimitTime limitTime = new LimitTime(bitmap, originalPrice, name, author, id);
+
+                LimitTime limitTime = new LimitTime(pictureUrl, originalPrice, name, author, id);
                 limitTimes.add(limitTime);
             }
             //市集精选数据
@@ -216,18 +211,11 @@ public class FairFragment extends Fragment implements View.OnClickListener {
                 String name = jsonObj.getString("name");
                 String id = jsonObj.getString("id");
                 String pictureUrl = jsonObj.getString("pictureUrl");
-                GetBitMap getpic = new GetBitMap();
-                getpic.getBitmap(pictureUrl, getActivity());
-                Bitmap bitmap = null;
-                while (bitmap == null) {
-                    bitmap = getpic.getpicture();
-                }
-                Choiceness choiceness = new Choiceness(sellingPrice, name, bitmap, id);
+
+                Choiceness choiceness = new Choiceness(sellingPrice, name, pictureUrl, id);
                 choicenesses.add(choiceness);
             }
         } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
             e.printStackTrace();
         }
     }

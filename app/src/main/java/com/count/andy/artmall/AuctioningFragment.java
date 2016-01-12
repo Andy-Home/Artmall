@@ -119,19 +119,12 @@ public class AuctioningFragment extends Fragment implements AbsListView.OnScroll
                 String description = jsonObj.getString("description");
                 String endAt = jsonObj.getString("endAt");
                 String specialAdPictureUrl = jsonObj.getString("specialAdPictureUrl");
-                GetBitMap getpic = new GetBitMap();
-                getpic.getBitmap(specialAdPictureUrl, getActivity());
-                Bitmap bitmap = null;
-                while (bitmap == null) {
-                    bitmap = getpic.getpicture();
-                }
-                Auctioning auctioning = new Auctioning(bitmap, name, endAt, description);
+
+                Auctioning auctioning = new Auctioning(specialAdPictureUrl, name, endAt, description);
                 auctionings.add(auctioning);
             }
 
         } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
             e.printStackTrace();
         }
     }

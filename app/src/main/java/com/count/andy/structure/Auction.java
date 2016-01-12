@@ -10,10 +10,10 @@ public class Auction {
     public int specialBidNum;
     public String name;
     public String endAt;
-    public Bitmap bitmap;
+    public String bitmap;
     public String id;
 
-    public Auction(Bitmap bitmap, int specialBidNum, String name, String endAt, String id) {
+    public Auction(String bitmap, int specialBidNum, String name, String endAt, String id) {
         this.bitmap = bitmap;
         this.specialBidNum = specialBidNum;
         this.name = name;

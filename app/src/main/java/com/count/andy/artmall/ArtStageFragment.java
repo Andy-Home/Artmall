@@ -137,20 +137,12 @@ public class ArtStageFragment extends Fragment {
                 String arts = jsonObj.getString("arts");
                 String storyTitle = jsonObj.getString("storyTitle");
                 String storyPicUrl = jsonObj.getString("storyPicUrl");
-                GetBitMap getpic = new GetBitMap();
-                getpic.getBitmap(storyPicUrl, getActivity());
-                Bitmap bitmap = null;
-                while (bitmap == null) {
-                    bitmap = getpic.getpicture();
-                }
                 createAt = dateChange(createAt);
-                ArtStage artStage = new ArtStage(createAt, name, storyTitle, arts, bitmap, id);
+                ArtStage artStage = new ArtStage(createAt, name, storyTitle, arts, storyPicUrl, id);
                 artStages.add(artStage);
             }
 
         } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
             e.printStackTrace();
         }
     }

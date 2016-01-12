@@ -7,9 +7,9 @@ import android.graphics.Bitmap;
  */
 public class Content {
     public String name, artname, viewerNum, content_url;
-    public Bitmap artBitmap, background_url;
+    public String artBitmap, background_url;
 
-    public Content(String name, String artname, String viewerNum, Bitmap artBitmap, Bitmap background_url, String content_url) {
+    public Content(String name, String artname, String viewerNum, String artBitmap, String background_url, String content_url) {
         this.name = name;
         this.artname = artname;
         this.viewerNum = viewerNum;

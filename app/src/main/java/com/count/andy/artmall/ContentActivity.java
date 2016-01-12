@@ -65,8 +65,17 @@ public class ContentActivity extends Activity {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            imageView.setImageBitmap(content.background_url);
-            contentWidget.setImageView(content.artBitmap);
+            try {
+                GetBitMap.getBitmap(content.background_url, ContentActivity.this, imageView);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                contentWidget.setImageView(content.artBitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
             contentWidget.setArtName(content.artname);
             contentWidget.setContent(content.content_url);
             contentWidget.setName(content.name);
@@ -83,22 +92,10 @@ public class ContentActivity extends Activity {
             String storyTitle = jsonObjs.getString("storyTitle");
             String arts = jsonObjs.getString("arts");
             String viewerNum = jsonObjs.getString("viewerNum");
-            GetBitMap getpic = new GetBitMap();
-            getpic.getBitmap(artsUrl, ContentActivity.this);
-            Bitmap artBitmap = null;
-            while (artBitmap == null) {
-                getpic.getpicture();
-            }
-            getpic.getBitmap(storyPicUrl, ContentActivity.this);
-            Bitmap backBitmap = null;
-            while (backBitmap == null) {
-                getpic.getpicture();
-            }
-            content = new Content(storyTitle, arts, viewerNum, artBitmap, backBitmap, storyContentUrl);
+
+            content = new Content(storyTitle, arts, viewerNum, artsUrl, storyPicUrl, storyContentUrl);
         } catch (JSONException e1) {
             e1.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
 
     }

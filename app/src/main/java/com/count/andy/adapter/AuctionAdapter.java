@@ -10,10 +10,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.count.andy.artmall.R;
+import com.count.andy.network.GetBitMap;
 import com.count.andy.structure.Auction;
 import com.count.andy.structure.Single;
 import com.count.andy.widget.HammerWidget;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -64,7 +66,11 @@ public class AuctionAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) view.getTag();
         }
         Log.d("test", "" + (flag++));
-        viewHolder.imageView.setImageBitmap(auctions.get(i).bitmap);
+        try {
+            GetBitMap.getBitmap(auctions.get(i).bitmap, context, viewHolder.imageView);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         viewHolder.title.setText(auctions.get(i).name);
         viewHolder.hammerWidget.setTimes(auctions.get(i).specialBidNum + "次");
         try {

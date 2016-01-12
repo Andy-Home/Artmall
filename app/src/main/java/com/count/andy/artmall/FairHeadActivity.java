@@ -144,19 +144,12 @@ public class FairHeadActivity extends Activity implements AdapterView.OnItemClic
                 String id = jsonObj.getString("id");
                 Double sellingPrice = jsonObj.getDouble("sellingPrice");
                 String pictureUrl = jsonObj.getString("pictureUrl");
-                GetBitMap getpic = new GetBitMap();
-                getpic.getBitmap(pictureUrl, FairHeadActivity.this);
-                Bitmap bitmap = null;
-                while (bitmap == null) {
-                    bitmap = getpic.getpicture();
-                }
-                Person person = new Person(bitmap, name, null, sellingPrice, null, id);
+
+                Person person = new Person(pictureUrl, name, null, sellingPrice, null, id);
                 persons.add(person);
             }
 
         } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
             e.printStackTrace();
         }
     }

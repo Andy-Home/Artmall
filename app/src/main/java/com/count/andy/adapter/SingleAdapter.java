@@ -11,9 +11,11 @@ import android.widget.TextView;
 
 import com.count.andy.artmall.CenterActivity;
 import com.count.andy.artmall.R;
+import com.count.andy.network.GetBitMap;
 import com.count.andy.structure.Single;
 import com.count.andy.widget.HammerWidget;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -64,7 +66,11 @@ public class SingleAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) view.getTag();
         }
-        viewHolder.imageView.setImageBitmap(singles.get(i).bitmap);
+        try {
+            GetBitMap.getBitmap(singles.get(i).bitmap, context, viewHolder.imageView);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         viewHolder.title.setText(singles.get(i).name);
         viewHolder.price.setText("￥" + singles.get(i).currentPrice);
         viewHolder.hammerWidget.setTimes(singles.get(i).rebidStatus + "次");

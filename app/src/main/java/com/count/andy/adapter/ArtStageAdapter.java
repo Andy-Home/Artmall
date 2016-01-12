@@ -9,8 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.count.andy.artmall.R;
+import com.count.andy.network.GetBitMap;
 import com.count.andy.structure.ArtStage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -54,7 +56,11 @@ public class ArtStageAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) view.getTag();
         }
-        viewHolder.imageView.setImageBitmap(artStages.get(i).bitmap);
+        try {
+            GetBitMap.getBitmap(artStages.get(i).bitmap ,context,viewHolder.imageView);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         viewHolder.title.setText(artStages.get(i).title);
         viewHolder.date.setText(artStages.get(i).date);
         viewHolder.author.setText(artStages.get(i).author);

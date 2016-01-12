@@ -10,9 +10,9 @@ import com.count.andy.network.GetBitMap;
 public class Choiceness {
     public Double sellingPrice;
     public String name, id;
-    public Bitmap bitmap;
+    public String bitmap;
 
-    public Choiceness(Double sellingPrice, String name, Bitmap bitmap, String id) {
+    public Choiceness(Double sellingPrice, String name, String bitmap, String id) {
         this.sellingPrice = sellingPrice;
         this.name = name;
         this.bitmap = bitmap;

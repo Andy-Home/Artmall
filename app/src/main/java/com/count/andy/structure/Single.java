@@ -10,9 +10,9 @@ public class Single {
     public String endAt;
     public int rebidStatus;
     public String name, id;
-    public Bitmap bitmap;
+    public String bitmap;
 
-    public Single(Double currentPrice, String endAt, int rebidStatus, String name, Bitmap bitmap, String id){
+    public Single(Double currentPrice, String endAt, int rebidStatus, String name, String bitmap, String id) {
         this.currentPrice = currentPrice;
         this.endAt = endAt;
         this.rebidStatus = rebidStatus;

@@ -148,18 +148,11 @@ public class PersonActivity extends Activity implements AdapterView.OnItemClickL
                 Integer auctionTimes = jsonObj.getInt("auctionTimes");
                 String pictureUrl = jsonObj.getString("pictureUrl");
                 String id = jsonObj.getString("id");
-                GetBitMap getpic = new GetBitMap();
-                getpic.getBitmap(pictureUrl, PersonActivity.this);
-                Bitmap bitmap = null;
-                while (bitmap == null) {
-                    bitmap = getpic.getpicture();
-                }
-                Person person = new Person(bitmap, name, auctionTimes, currentPrice, endAt, id);
+
+                Person person = new Person(pictureUrl, name, auctionTimes, currentPrice, endAt, id);
                 persons.add(person);
             }
         } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
             e.printStackTrace();
         }
     }

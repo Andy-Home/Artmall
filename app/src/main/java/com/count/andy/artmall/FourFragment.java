@@ -163,19 +163,12 @@ public class FourFragment extends Fragment {
                 Double originalPrice = jsonObj.getDouble("originalPrice");
                 String pictureUrl = jsonObj.getString("pictureUrl");
                 String id = jsonObj.getString("id");
-                GetBitMap getpic = new GetBitMap();
-                getpic.getBitmap(pictureUrl, getActivity());
-                Bitmap bitmap = null;
-                while (bitmap == null) {
-                    bitmap = getpic.getpicture();
-                }
-                Choiceness four = new Choiceness(originalPrice, name, bitmap, id);
+
+                Choiceness four = new Choiceness(originalPrice, name, pictureUrl, id);
                 fours.add(four);
             }
 
         } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
             e.printStackTrace();
         }
     }

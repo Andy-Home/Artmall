@@ -9,8 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.count.andy.artmall.R;
+import com.count.andy.network.GetBitMap;
 import com.count.andy.structure.Choiceness;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -53,7 +55,11 @@ public class ChoicenessAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) view.getTag();
         }
-        viewHolder.imageView.setImageBitmap(choicenesses.get(i).bitmap);
+        try {
+            GetBitMap.getBitmap(choicenesses.get(i).bitmap, context, viewHolder.imageView);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         viewHolder.title.setText(choicenesses.get(i).name);
         viewHolder.price.setText("￥" + choicenesses.get(i).sellingPrice);
         return view;

@@ -7,9 +7,9 @@ import android.graphics.Bitmap;
  */
 public class ArtStage {
     public String date, name, author, title, id;
-    public Bitmap bitmap;
+    public String bitmap;
 
-    public ArtStage(String date, String title, String name, String author, Bitmap bitmap, String id){
+    public ArtStage(String date, String title, String name, String author, String bitmap, String id) {
         this.date = date;
         this.title =title;
         this.name = name;

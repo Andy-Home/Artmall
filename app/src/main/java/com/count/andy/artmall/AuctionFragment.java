@@ -144,14 +144,8 @@ public class AuctionFragment extends Fragment implements View.OnClickListener {
                 String name = jsonObj.getString("name");
                 String endAt = jsonObj.getString("endAt");
                 String pictureUrl = jsonObj.getString("pictureUrl");
-                GetBitMap getpic = new GetBitMap();
-                getpic.getBitmap(pictureUrl, getActivity());
-                Bitmap bitmap = null;
-                while (bitmap == null) {
-                    bitmap = getpic.getpicture();
-                }
 
-                Single single = new Single(currentPrice, endAt, auctionTimes, name, bitmap, id);
+                Single single = new Single(currentPrice, endAt, auctionTimes, name, pictureUrl, id);
                 singles.add(single);
             }
             //拍卖专场数据
@@ -163,18 +157,11 @@ public class AuctionFragment extends Fragment implements View.OnClickListener {
                 String name = jsonObj.getString("name");
                 String endAt = jsonObj.getString("endAt");
                 String specialAdPictureUrl = jsonObj.getString("specialAdPictureUrl");
-                GetBitMap getpic = new GetBitMap();
-                getpic.getBitmap(specialAdPictureUrl, getActivity());
-                Bitmap bitmap = null;
-                while (bitmap == null) {
-                    bitmap = getpic.getpicture();
-                }
-                Auction auction = new Auction(bitmap, specialBidNum, name, endAt, id);
+
+                Auction auction = new Auction(specialAdPictureUrl, specialBidNum, name, endAt, id);
                 auctions.add(auction);
             }
         } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
             e.printStackTrace();
         }
     }

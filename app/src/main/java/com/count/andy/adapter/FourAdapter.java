@@ -11,9 +11,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.count.andy.artmall.R;
+import com.count.andy.network.GetBitMap;
 import com.count.andy.structure.ArtStage;
 import com.count.andy.structure.Choiceness;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -38,7 +40,11 @@ public class FourAdapter extends RecyclerView.Adapter<FourAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        viewHolder.imageView.setImageBitmap(fours.get(i).bitmap);
+        try {
+            GetBitMap.getBitmap(fours.get(i).bitmap, context, viewHolder.imageView);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         viewHolder.title.setText(fours.get(i).name);
         viewHolder.price.setText("￥" + fours.get(i).sellingPrice);
     }
