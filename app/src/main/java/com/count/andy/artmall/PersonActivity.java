@@ -29,7 +29,7 @@ import java.util.ArrayList;
 /**
  * Created by andy on 15-11-18.
  */
-public class PersonActivity extends Activity implements AdapterView.OnItemClickListener{
+public class PersonActivity extends Activity implements AdapterView.OnItemClickListener {
     private static String URL = "http://www.artmall.com/app/findSpecialAuctions?specialTopicsId=";
     private Boolean flag = false, flag1 = true;
     private int Date_Numeber = 0;
@@ -54,7 +54,7 @@ public class PersonActivity extends Activity implements AdapterView.OnItemClickL
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setCustomView(R.layout.title_person);
         TextView textView;
-        textView = (TextView)findViewById(R.id.title_person);
+        textView = (TextView) findViewById(R.id.title_person);
         textView.setText(name);
 
         setContentView(R.layout.activity_person);
@@ -104,17 +104,24 @@ public class PersonActivity extends Activity implements AdapterView.OnItemClickL
         @Override
         protected Void doInBackground(String... strings) {
             //从服务端获取数据，并且解析
-            String URL1 = URL + ID + "&page="+page;
-            page++;
-            HttpUtil httpUtil = new HttpUtil(URL1);
-            String str = null;
-            try {
-                str = httpUtil.downloaddata();
-            } catch (IOException e) {
-                e.printStackTrace();
-                Log.d(" ", "Unable to retrieve web page. URL may be invalid.");
+            if (personAdapter == null) {
+                String URL1 = URL + ID + "&page=" + page;
+                page++;
+                HttpUtil httpUtil = new HttpUtil(URL1, PersonActivity.this);
+                String str = null;
+                try {
+                    httpUtil.downloaddata();
+                    while (str == null) {
+                        while (str == null) {
+                            str = httpUtil.getString();
+                        }
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Log.d(" ", "Unable to retrieve web page. URL may be invalid.");
+                }
+                parseJson(str);
             }
-            parseJson(str);
             return null;
         }
 
@@ -141,7 +148,12 @@ public class PersonActivity extends Activity implements AdapterView.OnItemClickL
                 Integer auctionTimes = jsonObj.getInt("auctionTimes");
                 String pictureUrl = jsonObj.getString("pictureUrl");
                 String id = jsonObj.getString("id");
-                Bitmap bitmap = GetBitMap.getBitmap(pictureUrl);
+                GetBitMap getpic = new GetBitMap();
+                getpic.getBitmap(pictureUrl, PersonActivity.this);
+                Bitmap bitmap = null;
+                while (bitmap == null) {
+                    bitmap = getpic.getpicture();
+                }
                 Person person = new Person(bitmap, name, auctionTimes, currentPrice, endAt, id);
                 persons.add(person);
             }

@@ -53,10 +53,13 @@ public class LimitTimeActivity extends Activity{
         protected Void doInBackground(String... strings) {
             String URL2 = URL1 + ID;
             //从服务端获取数据，并且解析
-            HttpUtil httpUtil = new HttpUtil(URL2);
+            HttpUtil httpUtil = new HttpUtil(URL2, LimitTimeActivity.this);
             String str = null;
             try {
-                str = httpUtil.downloaddata();
+                httpUtil.downloaddata();
+                while (str == null) {
+                    str = httpUtil.getString();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
                 Log.d(" ", "Unable to retrieve web page. URL may be invalid.");

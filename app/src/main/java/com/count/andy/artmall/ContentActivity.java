@@ -48,10 +48,13 @@ public class ContentActivity extends Activity {
         protected Void doInBackground(String... strings) {
             String URL2 = URL1 + ID;
             //从服务端获取数据，并且解析
-            HttpUtil httpUtil = new HttpUtil(URL2);
+            HttpUtil httpUtil = new HttpUtil(URL2, ContentActivity.this);
             String str = null;
             try {
-                str = httpUtil.downloaddata();
+                httpUtil.downloaddata();
+                while (str == null) {
+                    str = httpUtil.getString();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
                 Log.d(" ", "Unable to retrieve web page. URL may be invalid.");
@@ -80,8 +83,17 @@ public class ContentActivity extends Activity {
             String storyTitle = jsonObjs.getString("storyTitle");
             String arts = jsonObjs.getString("arts");
             String viewerNum = jsonObjs.getString("viewerNum");
-            Bitmap artBitmap = GetBitMap.getBitmap(artsUrl);
-            Bitmap backBitmap = GetBitMap.getBitmap(storyPicUrl);
+            GetBitMap getpic = new GetBitMap();
+            getpic.getBitmap(artsUrl, ContentActivity.this);
+            Bitmap artBitmap = null;
+            while (artBitmap == null) {
+                getpic.getpicture();
+            }
+            getpic.getBitmap(storyPicUrl, ContentActivity.this);
+            Bitmap backBitmap = null;
+            while (backBitmap == null) {
+                getpic.getpicture();
+            }
             content = new Content(storyTitle, arts, viewerNum, artBitmap, backBitmap, storyContentUrl);
         } catch (JSONException e1) {
             e1.printStackTrace();

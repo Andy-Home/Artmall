@@ -5,4 +5,4 @@
     android:id="@+id/daimajia_indicator_wrapper"
     android:layout_gravity="center"
     android:layout_height="wrap_content">
-</LinearLayout><!-- From: file:/home/andy/StudioProjects/Artmall/library/src/main/res/layout/indicator_layout.xml --><!-- From: file:/home/andy/StudioProjects/Artmall/library/build/intermediates/bundles/debug/res/layout/indicator_layout.xml -->
+</LinearLayout><!-- From: file:/C:/Users/e/Documents/GitHub/Artmall/library/src/main/res/layout/indicator_layout.xml --><!-- From: file:/C:/Users/e/Documents/GitHub/Artmall/library/build/intermediates/bundles/debug/res/layout/indicator_layout.xml -->

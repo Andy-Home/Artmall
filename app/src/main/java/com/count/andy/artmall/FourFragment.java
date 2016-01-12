@@ -114,17 +114,22 @@ public class FourFragment extends Fragment {
         @Override
         protected Void doInBackground(String... strings) {
             //从服务端获取数据，并且解析
-            String URL1 = URL + ID + "&page=" + page;
-            page++;
-            HttpUtil httpUtil = new HttpUtil(URL1);
-            String str = null;
-            try {
-                str = httpUtil.downloaddata();
-            } catch (IOException e) {
-                e.printStackTrace();
-                Log.d(" ", "Unable to retrieve web page. URL may be invalid.");
+            if (fourAdapter == null) {
+                String URL1 = URL + ID + "&page=" + page;
+                page++;
+                HttpUtil httpUtil = new HttpUtil(URL1, getActivity());
+                String str = null;
+                try {
+                    httpUtil.downloaddata();
+                    while (str == null) {
+                        str = httpUtil.getString();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Log.d(" ", "Unable to retrieve web page. URL may be invalid.");
+                }
+                parseJson(str);
             }
-            parseJson(str);
             return null;
         }
 
@@ -158,7 +163,12 @@ public class FourFragment extends Fragment {
                 Double originalPrice = jsonObj.getDouble("originalPrice");
                 String pictureUrl = jsonObj.getString("pictureUrl");
                 String id = jsonObj.getString("id");
-                Bitmap bitmap = GetBitMap.getBitmap(pictureUrl);
+                GetBitMap getpic = new GetBitMap();
+                getpic.getBitmap(pictureUrl, getActivity());
+                Bitmap bitmap = null;
+                while (bitmap == null) {
+                    bitmap = getpic.getpicture();
+                }
                 Choiceness four = new Choiceness(originalPrice, name, bitmap, id);
                 fours.add(four);
             }

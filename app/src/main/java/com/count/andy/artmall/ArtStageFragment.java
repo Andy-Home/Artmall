@@ -100,10 +100,13 @@ public class ArtStageFragment extends Fragment {
             //从服务端获取数据，并且解析
             String URL1 = URL + page;
             page++;
-            HttpUtil httpUtil = new HttpUtil(URL1);
+            HttpUtil httpUtil = new HttpUtil(URL1, getActivity());
             String str = null;
             try {
-                str = httpUtil.downloaddata();
+                httpUtil.downloaddata();
+                while (str == null) {
+                    str = httpUtil.getString();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
                 Log.d(" ", "Unable to retrieve web page. URL may be invalid.");
@@ -122,7 +125,6 @@ public class ArtStageFragment extends Fragment {
         }
     }
 
-
     private void parseJson(String str) {
         try {
             //艺站数据
@@ -135,7 +137,12 @@ public class ArtStageFragment extends Fragment {
                 String arts = jsonObj.getString("arts");
                 String storyTitle = jsonObj.getString("storyTitle");
                 String storyPicUrl = jsonObj.getString("storyPicUrl");
-                Bitmap bitmap = GetBitMap.getBitmap(storyPicUrl);
+                GetBitMap getpic = new GetBitMap();
+                getpic.getBitmap(storyPicUrl, getActivity());
+                Bitmap bitmap = null;
+                while (bitmap == null) {
+                    bitmap = getpic.getpicture();
+                }
                 createAt = dateChange(createAt);
                 ArtStage artStage = new ArtStage(createAt, name, storyTitle, arts, bitmap, id);
                 artStages.add(artStage);

@@ -131,14 +131,19 @@ public class FairFragment extends Fragment implements View.OnClickListener {
     private class downloaddata extends AsyncTask<String, Void, Void> {
         @Override
         protected Void doInBackground(String... strings) {
-            HttpUtil httpUtil = new HttpUtil(URL);
-            String str = null;
-            try {
-                str = httpUtil.downloaddata();
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (limitTimeAdapter == null && choicenessAdapter == null) {
+                HttpUtil httpUtil = new HttpUtil(URL, getActivity());
+                String str = null;
+                try {
+                    httpUtil.downloaddata();
+                    while (str == null) {
+                        str = httpUtil.getString();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                parseJson(str);
             }
-            parseJson(str);
             return null;
         }
 
@@ -194,7 +199,12 @@ public class FairFragment extends Fragment implements View.OnClickListener {
                 String author = jsonObj.getString("author");
                 String id = jsonObj.getString("id");
                 String pictureUrl = jsonObj.getString("pictureUrl");
-                Bitmap bitmap = GetBitMap.getBitmap(pictureUrl);
+                GetBitMap getpic = new GetBitMap();
+                getpic.getBitmap(pictureUrl, getActivity());
+                Bitmap bitmap = null;
+                while (bitmap == null) {
+                    bitmap = getpic.getpicture();
+                }
                 LimitTime limitTime = new LimitTime(bitmap, originalPrice, name, author, id);
                 limitTimes.add(limitTime);
             }
@@ -206,7 +216,12 @@ public class FairFragment extends Fragment implements View.OnClickListener {
                 String name = jsonObj.getString("name");
                 String id = jsonObj.getString("id");
                 String pictureUrl = jsonObj.getString("pictureUrl");
-                Bitmap bitmap = GetBitMap.getBitmap(pictureUrl);
+                GetBitMap getpic = new GetBitMap();
+                getpic.getBitmap(pictureUrl, getActivity());
+                Bitmap bitmap = null;
+                while (bitmap == null) {
+                    bitmap = getpic.getpicture();
+                }
                 Choiceness choiceness = new Choiceness(sellingPrice, name, bitmap, id);
                 choicenesses.add(choiceness);
             }

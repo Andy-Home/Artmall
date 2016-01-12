@@ -30,7 +30,7 @@ public class AuctionedFragment extends Fragment implements AbsListView.OnScrollL
     private View view;
     private ListView listView;
     private View loadMore;
-    private AuctioningAdapter auctioningAdapter;
+    private AuctioningAdapter auctioningAdapter = null;
 
     private ArrayList<Auctioning> auctionings = new ArrayList<Auctioning>();
     private static final String URL = "http://www.artmall.com/app/findspecialList?auctionType=3&page=";
@@ -79,17 +79,20 @@ public class AuctionedFragment extends Fragment implements AbsListView.OnScrollL
         @Override
         protected Void doInBackground(String... strings) {
             //从服务端获取数据，并且解析
-            String URL1 = URL + page;
-            page++;
-            HttpUtil httpUtil = new HttpUtil(URL1);
-            String str = null;
-            try {
-                str = httpUtil.downloaddata();
-            } catch (IOException e) {
-                e.printStackTrace();
-                Log.d(" ", "Unable to retrieve web page. URL may be invalid.");
+            if (auctioningAdapter == null) {
+                String URL1 = URL + page;
+                page++;
+                HttpUtil httpUtil = new HttpUtil(URL1, getActivity());
+                String str = null;
+                try {
+                    httpUtil.downloaddata();
+                    str = httpUtil.getString();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Log.d(" ", "Unable to retrieve web page. URL may be invalid.");
+                }
+                parseJson(str);
             }
-            parseJson(str);
             return null;
         }
 
@@ -114,7 +117,9 @@ public class AuctionedFragment extends Fragment implements AbsListView.OnScrollL
                 String description = jsonObj.getString("description");
                 String endAt = jsonObj.getString("endAt");
                 String specialAdPictureUrl = jsonObj.getString("specialAdPictureUrl");
-                Bitmap bitmap = GetBitMap.getBitmap(specialAdPictureUrl);
+                GetBitMap getpic = new GetBitMap();
+                getpic.getBitmap(specialAdPictureUrl, getActivity());
+                Bitmap bitmap = getpic.getpicture();
                 Auctioning auctioning = new Auctioning(bitmap, name, endAt, description);
                 auctionings.add(auctioning);
             }

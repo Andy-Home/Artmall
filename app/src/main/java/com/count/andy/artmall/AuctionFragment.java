@@ -100,17 +100,20 @@ public class AuctionFragment extends Fragment implements View.OnClickListener {
         @Override
         protected Void doInBackground(String... strings) {
             //从服务端获取数据，并且解析
-            if (adapter == null && mAdapter == null) {
-                HttpUtil httpUtil = new HttpUtil(URL);
+            // if (adapter == null && mAdapter == null) {
+            HttpUtil httpUtil = new HttpUtil(URL, getActivity());
                 String str = null;
                 try {
-                    str = httpUtil.downloaddata();
+                    httpUtil.downloaddata();
+                    while (str == null) {
+                        str = httpUtil.getString();
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                     Log.d(" ", "Unable to retrieve web page. URL may be invalid.");
                 }
                 parseJson(str);
-            }
+            //}
             return null;
         }
 
@@ -141,7 +144,13 @@ public class AuctionFragment extends Fragment implements View.OnClickListener {
                 String name = jsonObj.getString("name");
                 String endAt = jsonObj.getString("endAt");
                 String pictureUrl = jsonObj.getString("pictureUrl");
-                Bitmap bitmap = GetBitMap.getBitmap(pictureUrl);
+                GetBitMap getpic = new GetBitMap();
+                getpic.getBitmap(pictureUrl, getActivity());
+                Bitmap bitmap = null;
+                while (bitmap == null) {
+                    bitmap = getpic.getpicture();
+                }
+
                 Single single = new Single(currentPrice, endAt, auctionTimes, name, bitmap, id);
                 singles.add(single);
             }
@@ -154,7 +163,12 @@ public class AuctionFragment extends Fragment implements View.OnClickListener {
                 String name = jsonObj.getString("name");
                 String endAt = jsonObj.getString("endAt");
                 String specialAdPictureUrl = jsonObj.getString("specialAdPictureUrl");
-                Bitmap bitmap = GetBitMap.getBitmap(specialAdPictureUrl);
+                GetBitMap getpic = new GetBitMap();
+                getpic.getBitmap(specialAdPictureUrl, getActivity());
+                Bitmap bitmap = null;
+                while (bitmap == null) {
+                    bitmap = getpic.getpicture();
+                }
                 Auction auction = new Auction(bitmap, specialBidNum, name, endAt, id);
                 auctions.add(auction);
             }

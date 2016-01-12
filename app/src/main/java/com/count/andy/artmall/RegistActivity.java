@@ -89,7 +89,7 @@ public class RegistActivity extends Activity implements View.OnClickListener {
                 URL = URL2;
                 send = send2;
             }
-            HttpUtil httpUtil = new HttpUtil(URL);
+            HttpUtil httpUtil = new HttpUtil(URL, RegistActivity.this);
             String str = null;
             try {
                 str = httpUtil.sendPost(send);

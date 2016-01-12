@@ -29,7 +29,7 @@ import java.util.ArrayList;
 /**
  * Created by andy on 15-11-27.
  */
-public class FairHeadActivity extends Activity implements AdapterView.OnItemClickListener{
+public class FairHeadActivity extends Activity implements AdapterView.OnItemClickListener {
     private static String URL = "http://www.artmall.com/app/findSpecialGoods?specialTopicsId=";
     private Boolean flag = false;
     private int Date_Numeber = 0;
@@ -92,7 +92,7 @@ public class FairHeadActivity extends Activity implements AdapterView.OnItemClic
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        Intent intent = new Intent(FairHeadActivity.this , LimitTimeActivity.class);
+        Intent intent = new Intent(FairHeadActivity.this, LimitTimeActivity.class);
         intent.putExtra("ID", persons.get(i).id);
         intent.putExtra("Name", persons.get(i).name);
         startActivity(intent);
@@ -103,17 +103,22 @@ public class FairHeadActivity extends Activity implements AdapterView.OnItemClic
         @Override
         protected Void doInBackground(String... strings) {
             //从服务端获取数据，并且解析
-            String URL1 = URL + ID + "&page=" + page;
-            page++;
-            HttpUtil httpUtil = new HttpUtil(URL1);
-            String str = null;
-            try {
-                str = httpUtil.downloaddata();
-            } catch (IOException e) {
-                e.printStackTrace();
-                Log.d(" ", "Unable to retrieve web page. URL may be invalid.");
+            if (fairHeadAdapter == null) {
+                String URL1 = URL + ID + "&page=" + page;
+                page++;
+                HttpUtil httpUtil = new HttpUtil(URL1, FairHeadActivity.this);
+                String str = null;
+                try {
+                    httpUtil.downloaddata();
+                    while (str == null) {
+                        str = httpUtil.getString();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Log.d(" ", "Unable to retrieve web page. URL may be invalid.");
+                }
+                parseJson(str);
             }
-            parseJson(str);
             return null;
         }
 
@@ -139,7 +144,12 @@ public class FairHeadActivity extends Activity implements AdapterView.OnItemClic
                 String id = jsonObj.getString("id");
                 Double sellingPrice = jsonObj.getDouble("sellingPrice");
                 String pictureUrl = jsonObj.getString("pictureUrl");
-                Bitmap bitmap = GetBitMap.getBitmap(pictureUrl);
+                GetBitMap getpic = new GetBitMap();
+                getpic.getBitmap(pictureUrl, FairHeadActivity.this);
+                Bitmap bitmap = null;
+                while (bitmap == null) {
+                    bitmap = getpic.getpicture();
+                }
                 Person person = new Person(bitmap, name, null, sellingPrice, null, id);
                 persons.add(person);
             }

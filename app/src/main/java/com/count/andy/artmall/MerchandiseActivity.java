@@ -59,10 +59,13 @@ public class MerchandiseActivity extends Activity {
         protected Void doInBackground(String... strings) {
             String URL2 = URL1 + ID;
             //从服务端获取数据，并且解析
-            HttpUtil httpUtil = new HttpUtil(URL2);
+            HttpUtil httpUtil = new HttpUtil(URL2, MerchandiseActivity.this);
             String str = null;
             try {
-                str = httpUtil.downloaddata();
+                httpUtil.downloaddata();
+                while (str == null) {
+                    str = httpUtil.getString();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
                 Log.d(" ", "Unable to retrieve web page. URL may be invalid.");
@@ -105,20 +108,4 @@ public class MerchandiseActivity extends Activity {
         }
 
     }
-
-    Html.ImageGetter imgGetter = new Html.ImageGetter() {
-        public Drawable getDrawable(String source) {
-            Drawable drawable = null;
-            URL url;
-            try {
-                url = new URL(source);
-                drawable = Drawable.createFromStream(url.openStream(), "src");  //获取网路图片
-            } catch (Exception e) {
-                return null;
-            }
-            drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable
-                    .getIntrinsicHeight());
-            return drawable;
-        }
-    };
 }

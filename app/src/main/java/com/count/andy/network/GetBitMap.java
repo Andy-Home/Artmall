@@ -1,8 +1,16 @@
 package com.count.andy.network;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.Volley;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,27 +21,36 @@ import java.net.URL;
  * Created by andy on 15-11-11.
  */
 public class GetBitMap {
-    public static Bitmap getBitmap(String urls) throws IOException {
-        InputStream is = null;
-        try {
-            URL url = new URL(urls);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setReadTimeout(10000	/*	milliseconds	*/);
-            conn.setConnectTimeout(15000	/*	milliseconds	*/);
-            conn.setRequestMethod("GET");
-            conn.setDoInput(true);
-            //	Starts	the	query
-            conn.connect();
-            int response = conn.getResponseCode();
-            Log.d("response", "The response is:	" + response);
-            is = conn.getInputStream();
-            //	Convert	the	InputStream	into	a	string
-            Bitmap bitmap = BitmapFactory.decodeStream(is);
-            return bitmap;
-        } finally {
-            if (is != null) {
-                is.close();
+    Bitmap response;
+
+    public GetBitMap() {
+    }
+
+    public void getBitmap(String urls, Context context) throws IOException {
+        RequestQueue mQueue = Volley.newRequestQueue(context);
+        Request imageRequest = new ImageRequest(
+                urls,
+                new Response.Listener<Bitmap>() {
+                    @Override
+                    public void onResponse(Bitmap response) {
+                        Return(response);
+                    }
+                }, 0, 0, Bitmap.Config.RGB_565, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //imageView.setImageResource(R.drawable.default_image);
             }
-        }
+        });
+        imageRequest.setShouldCache(true);
+
+        mQueue.add(imageRequest);
+    }
+
+    private void Return(Bitmap response) {
+        this.response = response;
+    }
+
+    public Bitmap getpicture() {
+        return response;
     }
 }

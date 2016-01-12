@@ -58,15 +58,20 @@ public class FourListFragment extends Fragment {
         @Override
         protected Void doInBackground(String... strings) {
             //从服务端获取数据，并且解析
-            HttpUtil httpUtil = new HttpUtil(URL);
-            String str = null;
-            try {
-                str = httpUtil.downloaddata();
-            } catch (IOException e) {
-                e.printStackTrace();
-                Log.d(" ", "Unable to retrieve web page. URL may be invalid.");
+            if (mAdapter == null) {
+                HttpUtil httpUtil = new HttpUtil(URL, getActivity());
+                String str = null;
+                try {
+                    httpUtil.downloaddata();
+                    while (str == null) {
+                        str = httpUtil.getString();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Log.d(" ", "Unable to retrieve web page. URL may be invalid.");
+                }
+                parseJson(str);
             }
-            parseJson(str);
             return null;
         }
 

@@ -83,7 +83,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         @Override
         protected Void doInBackground(String... strings) {
             //从服务端获取数据，并且解析
-            HttpUtil httpUtil = new HttpUtil(URL);
+            HttpUtil httpUtil = new HttpUtil(URL, LoginActivity.this);
             String str = null;
             try {
                 str = httpUtil.sendPost(send);

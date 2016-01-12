@@ -1,6 +1,15 @@
 package com.count.andy.network;
 
+import android.content.Context;
 import android.util.Log;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,80 +21,71 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by andy on 15-11-11.
  */
 public class HttpUtil {
     private String url;
+    private String response;
+    RequestQueue mQueue;
 
-    public HttpUtil(String url) {
+    public HttpUtil(String url, Context context) {
         this.url = url;
+        mQueue = Volley.newRequestQueue(context);
     }
 
-    public String downloaddata() throws IOException {
-        InputStream is = null;
-        try {
-            URL url = new URL(this.url);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setReadTimeout(10000	/*	milliseconds	*/);
-            conn.setConnectTimeout(15000	/*	milliseconds	*/);
-            conn.setRequestMethod("GET");
-            conn.setDoInput(true);
-            //	Starts	the	query
-            conn.connect();
-            int response = conn.getResponseCode();
-            Log.d("response", "The	response	is:	" + response);
-            is = conn.getInputStream();
-            //	Convert	the	InputStream	into	a	string
-            String contentAsString = readIt(is);
-            return contentAsString;
-        } finally {
-            if (is != null) {
-                is.close();
+    public void downloaddata() throws IOException {
+        Request stringRequest = new StringRequest(this.url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("TAG", response);
+                        Return(response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("TAG", error.getMessage(), error);
             }
-        }
+        });
+        stringRequest.setShouldCache(true);
+
+        mQueue.add(stringRequest);
     }
 
-    public String sendPost(String params) throws IOException {
-        InputStream in = null;
-        try {
-            URL realurl = new URL(this.url);
-            HttpURLConnection conn = (HttpURLConnection) realurl.openConnection();
-            conn.setDoOutput(true);
-            conn.setRequestMethod("POST");
-            PrintWriter pw = new PrintWriter(conn.getOutputStream());
-            pw.print(params);
-            pw.flush();
-            pw.close();
-            in = conn.getInputStream();
-            String contentAsString = readIt(in);
-            return contentAsString;
-        } finally {
-            if (in != null) {
-                in.close();
-            }
-        }
+    private void Return(String response) {
+        this.response = response;
     }
 
-    private String readIt(InputStream stream) {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
-        StringBuilder sb = new StringBuilder();
+    public String sendPost(final String params) throws IOException {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, this.url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("TAG", response);
+                        Return(response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("TAG", error.getMessage(), error);
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("params1", params);
+                return map;
+            }
+        };
+        mQueue.add(stringRequest);
+        return response;
+    }
 
-        String line = null;
-        try {
-            while ((line = reader.readLine()) != null) {
-                sb.append(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                stream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return sb.toString();
+    public String getString() {
+        return this.response;
     }
 }
